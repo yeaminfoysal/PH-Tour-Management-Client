@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import { toast } from "sonner";
 import z from "zod"
 
 const registerSchema = z
@@ -32,6 +34,8 @@ export default function RegisterForm({
     ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
 
+    const [register] = useRegisterMutation();
+
     const form = useForm<z.infer<typeof registerSchema>>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
@@ -48,8 +52,14 @@ export default function RegisterForm({
             email: data.email,
             password: data.password,
         }
-
-        console.log(userInfo);
+        try {
+            console.log(userInfo);
+            const result = await register(userInfo).unwrap();
+            console.log(result);
+            toast.success("User created successfully");
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
