@@ -1,7 +1,7 @@
 
 import TravelLogin from "@/assets/images/travel-login.jpg";
-import LoginForm from "@/modules/Authentication/LoginForm";
 import Logo from "@/assets/logo/logo";
+import { LoginForm } from "@/modules/Authentication/LoginForm";
 
 export default function Login() {
     return (
