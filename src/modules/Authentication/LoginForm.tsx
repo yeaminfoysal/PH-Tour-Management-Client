@@ -9,6 +9,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import config from "@/config";
 import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
@@ -22,16 +23,20 @@ export function LoginForm({
     const navigate = useNavigate();
     const form = useForm();
     const [login] = useLoginMutation();
+
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         try {
-            const res = await login(data).unwrap();
-            console.log(res);
+            await login(data).unwrap();
+            navigate("/")
         } catch (err: any) {
             console.error(err);
 
             if (err.status === 401) {
                 toast.error("Your account is not verified");
                 navigate("/verify", { state: data.email });
+            }
+            if (err.status === 400) {
+                toast.error("Invalied credientials");
             }
         }
     };
@@ -97,6 +102,7 @@ export function LoginForm({
                 </div>
 
                 <Button
+                    onClick={() => window.open(`${config.baseUrl}/auth/google`)}
                     type="button"
                     variant="outline"
                     className="w-full cursor-pointer"
