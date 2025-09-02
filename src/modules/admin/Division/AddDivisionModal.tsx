@@ -19,22 +19,36 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useAddDivisionMutation } from "@/redux/features/division/division.api";
 import { useState } from "react";
 ;
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export function AddDivisionModal() {
     const form = useForm();
     const [image, setImage] = useState<File | null>(null);
+    const [addDivision] = useAddDivisionMutation()
+    const [open, setOpen] = useState(false)
 
-    console.log(image)
-    
     const onSubmit = async (data: any) => {
-        console.log(data)
+        const formData = new FormData();
+
+        formData.append("data", JSON.stringify(data));
+        formData.append("file", image as File);
+        const toastId = toast.loading("Creating division")
+        try {
+            const res = await addDivision(formData).unwrap();
+            console.log(res)
+            toast.success("Division Added", { id: toastId });
+            setOpen(false);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button>Add Division</Button>
             </DialogTrigger>
@@ -87,8 +101,8 @@ export function AddDivisionModal() {
                     <DialogClose asChild>
                         <Button variant="outline">Cancel</Button>
                     </DialogClose>
-                    <Button type="submit" form="add-division">
-                        Save changes
+                    <Button disabled={!image} type="submit" form="add-division">
+                        Add
                     </Button>
                 </DialogFooter>
             </DialogContent>

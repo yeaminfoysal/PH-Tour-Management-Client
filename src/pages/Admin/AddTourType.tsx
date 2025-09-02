@@ -1,7 +1,7 @@
 import { DeleteConfirmation } from "@/components/DeleteConfirmation";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { AddTourTypeModal } from "@/modules/admin/TourType/AddTourModal";
+import { AddTourTypeModal } from "@/modules/admin/TourType/AddTourTypeModal";
 import { useGetTourTypesQuery, useRemoveTourTypeMutation } from "@/redux/features/tour/tour.api"
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
