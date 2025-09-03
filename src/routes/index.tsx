@@ -11,6 +11,8 @@ import { userSidebarItems } from "./userSidebarItems";
 import Unauthorized from "@/pages/Unauthorized";
 import { withAuth } from "@/utils/withAuth";
 import { role } from "@/constants/role";
+import HomePage from "@/pages/HomePage";
+import Tours from "@/pages/Tour";
 
 export const router = createBrowserRouter([
     {
@@ -18,9 +20,17 @@ export const router = createBrowserRouter([
         Component: App,
         children: [
             {
+                Component: HomePage,
+                index: true
+            },
+            {
                 path: "about",
                 Component: About
-            }
+            },
+            {
+                Component: Tours,
+                path: "tours",
+            },
         ]
     },
     {
