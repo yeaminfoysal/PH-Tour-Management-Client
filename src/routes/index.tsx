@@ -13,6 +13,7 @@ import { withAuth } from "@/utils/withAuth";
 import { role } from "@/constants/role";
 import HomePage from "@/pages/HomePage";
 import Tours from "@/pages/Tour";
+import TourDetails from "@/pages/TourDetails";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
             {
                 Component: Tours,
                 path: "tours",
+            },
+            {
+                Component: TourDetails,
+                path: "tours/:id",
             },
         ]
     },
