@@ -24,6 +24,9 @@ export default function TourDetails() {
   if (isLoading) {
     return <p>Loading...</p>;
   }
+  if (!tourData) {
+    return <p>Something went wrong...</p>;
+  }
 
   return (
     <div className="container mx-auto p-6">

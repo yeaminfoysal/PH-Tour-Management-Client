@@ -14,6 +14,9 @@ import { role } from "@/constants/role";
 import HomePage from "@/pages/HomePage";
 import Tours from "@/pages/Tour";
 import TourDetails from "@/pages/TourDetails";
+import Booking from "@/pages/Booking";
+import Success from "@/pages/payment/Success";
+import Fail from "@/pages/payment/Fail";
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +38,18 @@ export const router = createBrowserRouter([
             {
                 Component: TourDetails,
                 path: "tours/:id",
+            },
+            {
+                Component: withAuth(Booking),
+                path: "booking/:id",
+            },
+            {
+                Component: withAuth(Success),
+                path: "payment/success",
+            },
+            {
+                Component: withAuth(Fail),
+                path: "payment/fail",
             },
         ]
     },
