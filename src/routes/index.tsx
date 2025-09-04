@@ -12,7 +12,7 @@ import Unauthorized from "@/pages/Unauthorized";
 import { withAuth } from "@/utils/withAuth";
 import { role } from "@/constants/role";
 import HomePage from "@/pages/HomePage";
-import Tours from "@/pages/Tour";
+import Tours from "@/pages/Tours";
 import TourDetails from "@/pages/TourDetails";
 import Booking from "@/pages/Booking";
 import Success from "@/pages/payment/Success";

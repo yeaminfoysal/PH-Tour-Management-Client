@@ -5,29 +5,29 @@ import {
   Select,
   SelectContent,
   SelectGroup,
-//   SelectItem,
+  SelectItem,
   SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-// import { useGetDivisionsQuery } from "@/redux/features/division/division.api";
 import { useState } from "react";
 import Logo from "@/assets/logo/logo";
+import { useGetDivisionQuery } from "@/redux/features/division/division.api";
 
 export default function HeroSection() {
   const [selectedDivision, setSelectedDivision] = useState<string | undefined>(
     undefined
   );
 
-//   const { data: divisionData, isLoading: divisionIsLoading } =
-    // useGetDivisionsQuery(undefined);
+  const { data: divisionData } =
+    useGetDivisionQuery(undefined);
 
-//   const divisionOption = divisionData?.map(
-//     (item: { _id: string; name: string }) => ({
-//       label: item.name,
-//       value: item._id,
-//     })
-//   );
+  const divisionOption = divisionData?.map(
+    (item: { _id: string; name: string }) => ({
+      label: item.name,
+      value: item._id,
+    })
+  );
 
   return (
     <section className="relative overflow-hidden py-32 ">
@@ -63,13 +63,13 @@ export default function HeroSection() {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Divisions</SelectLabel>
-                    {/* {divisionOption?.map(
+                    {divisionOption?.map(
                       (item: { value: string; label: string }) => (
                         <SelectItem key={item.value} value={item.value}>
                           {item.label}
                         </SelectItem>
                       )
-                    )} */}
+                    )}
                   </SelectGroup>
                 </SelectContent>
               </Select>
